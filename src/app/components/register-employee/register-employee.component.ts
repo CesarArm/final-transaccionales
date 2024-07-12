@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SalaryCalculationRequest } from '../../models/salary-calculation-request.model';
+import { SalaryCalculationResponse  } from '../../models/salary-calculation-response.model';
 import { SalaryCalculationService } from '../../services/salary.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { SalaryCalculationService } from '../../services/salary.service';
 })
 export class RegisterEmployeeComponent {
   employeeForm: FormGroup;
+  salaryResult: SalaryCalculationResponse | null = null;
 
   constructor(private fb: FormBuilder, private salaryService: SalaryCalculationService) {
     this.employeeForm = this.fb.group({
@@ -27,11 +29,10 @@ export class RegisterEmployeeComponent {
   onSubmit(): void {
     if (this.employeeForm.valid) {
       const salaryData: SalaryCalculationRequest = this.employeeForm.value;
-      const salaryResult = this.salaryService.calculateSalary(salaryData);
-      console.log(salaryResult);
-      alert(`Salario neto: ${salaryResult.netSalary}`);
+      this.salaryResult = this.salaryService.calculateSalary(salaryData);
     } else {
-      alert('Todos los campos son requeridos y deben ser números positivos.');
+      console.error('Todos los campos son requeridos y deben ser números positivos.');
+      this.salaryResult = null;
     }
   }
 }

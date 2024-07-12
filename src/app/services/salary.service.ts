@@ -11,18 +11,17 @@ export class SalaryCalculationService {
   calculateSalary(data: SalaryCalculationRequest): SalaryCalculationResponse {
     const regularHours = Math.min(data.hoursWorked, 40);
     const overtimeHours = data.hoursWorked > 40 ? data.hoursWorked - 40 : 0;
-
     const regularSalary = data.hourlyWage * regularHours;
     const overtimeSalary = data.hourlyWage * 1.5 * overtimeHours;
     const totalSalary = regularSalary + overtimeSalary;
-    const deductions = totalSalary * 0.1; // 10% deductions
+    const deductions = totalSalary * 0.1;
     const netSalary = totalSalary - deductions;
 
     return {
-      regularSalary: regularSalary,
-      overtimeSalary: overtimeSalary,
-      deductions: deductions,
-      netSalary: netSalary
+      regularSalary,
+      overtimeSalary,
+      deductions,
+      netSalary
     };
   }
 }

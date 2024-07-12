@@ -1,20 +1,29 @@
 <!-- register-employee.component.html -->
-<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="space-y-4 p-4 bg-white shadow-md rounded">
   <div>
-    <label for="name">Nombre:</label>
-    <input id="name" type="text" formControlName="name">
+    <label for="name" class="block mb-2">Nombre del Empleado:</label>
+    <input id="name" type="text" formControlName="name" class="w-full p-2 border border-gray-300 rounded">
   </div>
   <div>
-    <label for="hourlyWage">Salario por hora:</label>
-    <input id="hourlyWage" type="number" formControlName="hourlyWage">
+    <label for="hourlyWage" class="block mb-2">Salario por Hora:</label>
+    <input id="hourlyWage" type="number" formControlName="hourlyWage" class="w-full p-2 border border-gray-300 rounded">
   </div>
   <div>
-    <label for="hoursWorked">Horas trabajadas:</label>
-    <input id="hoursWorked" type="number" formControlName="hoursWorked">
+    <label for="hoursWorked" class="block mb-2">Horas Trabajadas:</label>
+    <input id="hoursWorked" type="number" formControlName="hoursWorked" class="w-full p-2 border border-gray-300 rounded">
   </div>
   <div>
-    <label for="overtimeHours">Horas extras:</label>
-    <input id="overtimeHours" type="number" formControlName="overtimeHours">
+    <label for="overtimeHours" class="block mb-2">Horas Extras:</label>
+    <input id="overtimeHours" type="number" formControlName="overtimeHours" class="w-full p-2 border border-gray-300 rounded">
   </div>
-  <button type="submit" [disabled]="!employeeForm.valid">Calcular Salario</button>
+  <button type="submit" [disabled]="!employeeForm.valid" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+    Calcular Salario
+  </button>
 </form>
+
+<div *ngIf="salaryResult" class="mt-8 p-4 bg-gray-100 rounded">
+  <div><strong>Salario Regular:</strong> {{ salaryResult.regularSalary }}</div>
+  <div><strong>Salario por Horas Extras:</strong> {{ salaryResult.overtimeSalary }}</div>
+  <div><strong>Deducciones:</strong> {{ salaryResult.deductions }}</div>
+  <div><strong>Salario Neto:</strong> {{ salaryResult.netSalary }}</div>
+</div>
