@@ -1,0 +1,20 @@
+<!-- register-employee.component.html -->
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Nombre:</label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+  <div>
+    <label for="hourlyWage">Salario por hora:</label>
+    <input id="hourlyWage" type="number" formControlName="hourlyWage">
+  </div>
+  <div>
+    <label for="hoursWorked">Horas trabajadas:</label>
+    <input id="hoursWorked" type="number" formControlName="hoursWorked">
+  </div>
+  <div>
+    <label for="overtimeHours">Horas extras:</label>
+    <input id="overtimeHours" type="number" formControlName="overtimeHours">
+  </div>
+  <button type="submit" [disabled]="!employeeForm.valid">Calcular Salario</button>
+</form>
