@@ -9,19 +9,18 @@ import { SalaryCalculationResponse } from '../models/salary-calculation-response
 export class SalaryCalculationService {
 
   calculateSalary(data: SalaryCalculationRequest): SalaryCalculationResponse {
-    const regularHours = Math.min(data.hoursWorked, 40);
-    const overtimeHours = data.hoursWorked > 40 ? data.hoursWorked - 40 : 0;
-    const regularSalary = data.hourlyWage * regularHours;
-    const overtimeSalary = data.hourlyWage * 1.5 * overtimeHours;
+
+    const regularSalary = data.hourlyWage * data.hoursWorked;
+    const overtimeSalary = data.hourlyWage * 1.5 * data.overtimeHours;
     const totalSalary = regularSalary + overtimeSalary;
     const deductions = totalSalary * 0.1;
     const netSalary = totalSalary - deductions;
 
     return {
-      regularSalary,
-      overtimeSalary,
-      deductions,
-      netSalary
+      regularSalary: regularSalary,
+      overtimeSalary: overtimeSalary,
+      deductions: deductions,
+      netSalary: netSalary
     };
   }
 }
